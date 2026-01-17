@@ -68,8 +68,7 @@ class BookingCommand:
 
 
 class BookingProcessor:
-    """Класс для работы"""
-    # обеспечивающий последовательность и атомарность операций.
+    """Класс для проведения процессов операций"""
     def __init__(self, event_session):
         self.event_session = event_session
 
@@ -89,11 +88,7 @@ class BookingProcessor:
 
 
 class Operation:
-    # Менять состояние сеанса и конкретного места
-    # (статус: свободно, забронировано, продано).
-    # Могла быть отменена (undo).
-    # Все изменения должны происходить только через
-    # эти операции.
+    """Операции для пользователей, чтобы взаимодействовать с сервисом"""
     def __init__(self, booking_processor: BookingProcessor,
                  booking_command: BookingCommand):
         self.booking_processor = booking_processor
@@ -104,7 +99,7 @@ class Operation:
 
 
 class ReserveSeat (Operation):
-    # бронирование
+    """Операция бронирования"""
     def __init__(self, booking_processor: BookingProcessor,
                  booking_command: BookingCommand):
         super().__init__(booking_processor, booking_command)
@@ -115,7 +110,7 @@ class ReserveSeat (Operation):
 
 
 class CancelReservation (Operation):
-    # отмена
+    """Отмена бронирования"""
     def __init__(self, booking_processor: BookingProcessor,
                  booking_command: BookingCommand):
         super().__init__(booking_processor, booking_command)
@@ -126,7 +121,7 @@ class CancelReservation (Operation):
 
 
 class PurchaseTicket (Operation):
-    # подтверждение брони и оплата
+    """Подтверждение брони и оплата"""
     def __init__(self, booking_processor: BookingProcessor,
                  booking_command: BookingCommand):
         super().__init__(booking_processor, booking_command)
@@ -137,6 +132,7 @@ class PurchaseTicket (Operation):
 
 
 class ChangeSeat (Operation):
+    """Операция смиены места брони"""
     def __init__(self, booking_processor: BookingProcessor,
                  booking_command: BookingCommand):
         super().__init__(booking_processor, booking_command)
@@ -171,5 +167,7 @@ cancel_reservation.execute(event_session, 6, user0)
 reserve_seat.execute(event_session, 7, user0)
 purchase_ticket.execute(event_session, 7, user0)
 
-print("Кажется, не успеваю")
+print()
+print("Кажется, не успеваю...")
 print("Ну задумка ведь верная, просто работает не идеально)")
+print("Слишком много времени ушло на осознание, что вообще просят.")
