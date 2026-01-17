@@ -11,12 +11,12 @@ class EventSession:
         self.map_of_seats[seat_id].status = 'забронировано'
 
     def cancel_reservation(self, seat_id, user):
-        """Отвена брони"""    
+        """Отвена брони"""
         self.map_of_seats[seat_id].current_user = None
         self.map_of_seats[seat_id].status = 'свободно'
 
     def purchase_ticket(self, seat_id, user):
-        """Оформление покупки"""    
+        """Оформление покупки"""
         self.map_of_seats[seat_id].current_user = user
         self.map_of_seats[seat_id].status = 'продано'
 
@@ -76,13 +76,15 @@ class BookingProcessor:
     def reserve_seat(self, session: EventSession, seatId: int, user: User):
         session.reserve_seat(seatId, user)
 
-    def cancel_reservation(self, session: EventSession, seatId: int, user: User):
+    def cancel_reservation(self, session: EventSession,
+                           seatId: int, user: User):
         session.cancel_reservation(seatId, user)
 
     def purchase_ticket(self, session: EventSession, seatId: int, user: User):
         session.purchase_ticket(seatId, user)
 
-    def change_seat(self, session: EventSession, from_seat_id: int, to_seat_id: int, user: User):
+    def change_seat(self, session: EventSession, from_seat_id: int,
+                    to_seat_id: int, user: User):
         session.change_seat(from_seat_id, to_seat_id, user)
 
 
@@ -139,8 +141,10 @@ class ChangeSeat (Operation):
                  booking_command: BookingCommand):
         super().__init__(booking_processor, booking_command)
 
-    def execute(self, session: EventSession, from_seat_id: int, to_seat_id: int, user: User):
-        self.booking_processor.change_seat(session, from_seat_id, to_seat_id, user)
+    def execute(self, session: EventSession, from_seat_id: int,
+                to_seat_id: int, user: User):
+        self.booking_processor.change_seat(session, from_seat_id,
+                                           to_seat_id, user)
         self.booking_command.change_seat(user, from_seat_id, to_seat_id)
 
 
@@ -167,4 +171,5 @@ cancel_reservation.execute(event_session, 6, user0)
 reserve_seat.execute(event_session, 7, user0)
 purchase_ticket.execute(event_session, 7, user0)
 
-print('')
+print("Кажется, не успеваю")
+print("Ну задумка ведь верная, просто работает не идеально)")
