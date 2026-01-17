@@ -166,9 +166,10 @@ change_seat.execute(event_session, 5, 6, user0)
 cancel_reservation.execute(event_session, 6, user0)
 reserve_seat.execute(event_session, 7, user0)
 purchase_ticket.execute(event_session, 7, user0)
-print(list(map(lambda s: s.status, map_of_seats)))
+print('Список мест:', list(map(lambda s: s.status, map_of_seats)))
 
 print()
 print("Кажется, не успеваю...")
 print("Ну задумка ведь верная, просто не учтено пару условий)")
-print("Слишком много времени ушло на осознание, что вообще просят и на создание базы.")
+print("Слишком много времени ушло на осознание, что вообще просят"
+      "и на создание базы.")
